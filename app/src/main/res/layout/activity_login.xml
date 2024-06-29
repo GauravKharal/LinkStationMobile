@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/login_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+                <TextView
+                    android:id="@+id/welcomeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/space_grotesk_bold"
+                    android:text="Welcome Back"
+                    android:textColor="#000"
+                    android:textSize="32sp"
+                    android:layout_marginHorizontal="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk"
+                    android:textSize="14sp"
+                    android:text="Log In to your LinkStation"
+                    android:textColor="#000"/>
+
+                <EditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="40dp"
+                    android:paddingHorizontal="15dp"
+                    android:fontFamily="@font/space_mono"
+                    android:textSize="14sp"
+                    android:hint="Email or Username"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/textbox"/>
+
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingHorizontal="15dp"
+                    android:fontFamily="@font/space_mono"
+                    android:textSize="14sp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:background="@drawable/textbox"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/loginButton"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Log In"
+                    style="@style/button_yellow"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    >
+                        <TextView
+                            android:id="@+id/forgotPassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            style="@style/links"
+                            android:textSize="14sp"
+                            android:text="Forgot Password" />
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="7dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginHorizontal="15dp"
+                            android:background="@drawable/black_circle_divider"/>
+                        <TextView
+                            android:id="@+id/forgotUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            style="@style/links"
+                            android:textSize="14sp"
+                            android:text="Forgot Username?" />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/donthaveaccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/space_grotesk"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:text="Don't have an Account?  " />
+
+                <TextView
+                    android:id="@+id/forgotUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/links"
+                    android:textSize="14sp"
+                    android:text="Sign Up" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
