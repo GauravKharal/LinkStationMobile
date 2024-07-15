@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
+    android:id="@+id/main"
     android:background="@drawable/login_background">
 
         <LinearLayout
@@ -21,7 +22,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/space_grotesk_bold"
-                    android:text="Welcome Back"
+                    android:text="@string/welcome_back"
                     android:textColor="#000"
                     android:textSize="32sp"
                     android:layout_marginHorizontal="20dp"/>
@@ -30,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/space_grotesk"
                     android:textSize="14sp"
-                    android:text="Log In to your LinkStation"
+                    android:text="@string/log_in_to_your_linkstation"
                     android:textColor="#000"/>
 
                 <EditText
@@ -41,7 +42,7 @@
                     android:paddingHorizontal="15dp"
                     android:fontFamily="@font/space_mono"
                     android:textSize="14sp"
-                    android:hint="Email or Username"
+                    android:hint="@string/email_or_username"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/textbox"/>
 
@@ -53,16 +54,16 @@
                     android:paddingHorizontal="15dp"
                     android:fontFamily="@font/space_mono"
                     android:textSize="14sp"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:background="@drawable/textbox"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/loginButton"
                     android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="40dp"
-                    android:text="Log In"
+                    android:text="@string/log_in"
                     style="@style/button_yellow"/>
 
                 <LinearLayout
@@ -78,12 +79,13 @@
                             android:layout_marginTop="10dp"
                             style="@style/links"
                             android:textSize="14sp"
-                            android:text="Forgot Password" />
+                            android:text="@string/forgot_password" />
                         <ImageView
                             android:layout_width="7dp"
                             android:layout_height="7dp"
                             android:layout_marginTop="17dp"
                             android:layout_marginHorizontal="15dp"
+                            android:contentDescription="@string/divider"
                             android:background="@drawable/black_circle_divider"/>
                         <TextView
                             android:id="@+id/forgotUsername"
@@ -92,7 +94,7 @@
                             android:layout_marginTop="10dp"
                             style="@style/links"
                             android:textSize="14sp"
-                            android:text="Forgot Username?" />
+                            android:text="@string/forgot_username" />
                 </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -108,16 +110,17 @@
                     android:fontFamily="@font/space_grotesk"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    android:text="Don't have an Account?  " />
+                    android:text="@string/dont_have_an_account" />
 
                 <TextView
-                    android:id="@+id/forgotUsername"
+                    android:id="@+id/signUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
                     style="@style/links"
                     android:textSize="14sp"
-                    android:text="Sign Up" />
+                    android:text="@string/sign_up" />
             </LinearLayout>
 
         </LinearLayout>

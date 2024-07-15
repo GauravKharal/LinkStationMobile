@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">LinkStation</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="log_in_to_your_linkstation">Log in to your LinkStation</string>
+    <string name="email_or_username">Email or Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="divider">Divider</string>
+    <string name="forgot_username">Forgot Username?</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
 </resources>
