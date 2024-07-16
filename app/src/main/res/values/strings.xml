@@ -10,4 +10,21 @@
     <string name="divider">Divider</string>
     <string name="forgot_username">Forgot Username?</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="stations">Stations</string>
+    <string name="settings">Settings</string>
+    <string name="create">Create</string>
+    <string name="analytics">Analytics</string>
+    <string name="earn">Earn</string>
+    <string name="username">dipakkumarkalwar</string>
+    <string name="total_clicks_count">69K</string>
+    <string name="total_clicks">Total Monthly Clicks</string>
+    <string name="account_analytics">Account Analytics</string>
+    <string name="last_7_days">Last 7 Days</string>
+    <string name="views">Views</string>
+    <string name="clicks">Clicks</string>
+    <string name="views_count">380k</string>
+    <string name="clicks_count">14.2k</string>
+    <string name="logo">Logo</string>
+
 </resources>
