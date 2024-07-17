@@ -27,5 +27,8 @@
     <string name="clicks_count">14.2k</string>
     <string name="logo">Logo</string>
     <string name="latest_published_stations">Latest Published Stations</string>
+    <string name="station_url">Station URL</string>
+    <string name="station_title">Station Title</string>
+
 
 </resources>

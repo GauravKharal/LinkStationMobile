@@ -1,41 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fef9ef"
-    tools:context=".DashboardActivity">
-    <LinearLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/top_bar"
-        android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/logo"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+    tools:context=".DashboardFragment">
 
-
-<!--    MAIN CONTENT   -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="18dp"
         android:paddingHorizontal="25dp"
-        app:layout_constraintTop_toBottomOf="@+id/topBar">
+        android:paddingVertical="18dp"
+        android:background="#fef9ef"
+        android:id="@+id/constraintLayout">
 
-<!--        USER INFORMATION / DASHBOARD HEADER      -->
+        <!-- USER INFORMATION / DASHBOARD HEADER -->
         <LinearLayout
             android:id="@+id/dashboard_header"
             android:layout_width="match_parent"
@@ -45,50 +24,51 @@
             android:paddingTop="12dp"
             android:paddingEnd="18dp"
             android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/round_images_border"
-                />
+                android:background="@drawable/round_images_border" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/space_grotesk_bold"
-                    android:textSize="16sp"
-                    android:textColor="#3d3d3d"
-                    android:text="@string/username"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/space_grotesk_bold"
-                    android:textSize="24sp"
-                    android:textColor="#3d3d3d"
-                    android:text="@string/total_clicks_count"/>
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_bold"
+                    android:text="@string/username"
+                    android:textColor="#3d3d3d"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_bold"
+                    android:text="@string/total_clicks_count"
+                    android:textColor="#3d3d3d"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp"
                     android:fontFamily="@font/space_grotesk_light"
                     android:text="@string/total_clicks"
-                    android:layout_marginTop="-6dp"
                     android:textColor="#3d3d3d"
                     android:textSize="10sp" />
             </LinearLayout>
-
         </LinearLayout>
 
-
-<!--        ACCOUNT ANALYTICS      -->
+        <!-- ACCOUNT ANALYTICS -->
         <LinearLayout
             android:id="@+id/account_analytics"
             android:layout_width="match_parent"
@@ -96,88 +76,93 @@
             android:layout_marginTop="15dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/dashboard_header">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/space_grotesk_medium"
                     android:text="@string/account_analytics"
                     android:textColor="#000"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
+                    android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/space_grotesk"
                     android:text="@string/last_7_days"
-                    android:textColor="#80000000"
-                    android:textSize="10sp"
                     android:textAlignment="textEnd"
-                    android:layout_weight="1"/>
+                    android:textColor="#80000000"
+                    android:textSize="10sp" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="7dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/white_section"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="25dp"
-                    android:paddingVertical="15dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/space_grotesk"
-                        android:textSize="12sp"
-                        android:text="@string/views"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/space_grotesk_medium"
-                        android:textSize="18sp"
-                        android:text="@string/views_count" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/white_section"
                     android:orientation="vertical"
                     android:paddingHorizontal="25dp"
-                    android:paddingVertical="15dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1">
+                    android:paddingVertical="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/space_grotesk"
-                        android:textSize="12sp"
-                        android:text="@string/clicks"
-                        />
+                        android:text="@string/views"
+                        android:textColor="#80000000"
+                        android:textSize="12sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/space_grotesk_medium"
-                        android:textSize="18sp"
-                        android:text="@string/clicks_count" />
+                        android:text="@string/views_count"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_section"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="25dp"
+                    android:paddingVertical="15dp">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/space_grotesk"
+                        android:text="@string/clicks"
+                        android:textColor="#80000000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/space_grotesk_medium"
+                        android:text="@string/clicks_count"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                </LinearLayout>
             </LinearLayout>
-
-
         </LinearLayout>
 
-
-        <!--        LATEST PUBLISHED STATIONS        -->
+        <!-- LATEST PUBLISHED STATIONS -->
         <LinearLayout
             android:id="@+id/latest_published_stations"
             android:layout_width="match_parent"
@@ -186,42 +171,25 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/account_analytics">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/space_grotesk_medium"
                     android:text="@string/latest_published_stations"
                     android:textColor="#000"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
+                    android:textSize="18sp" />
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/latest_published_stations_recyclerView1"
+                android:id="@+id/latest_published_stations_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-
-
-
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/latest_published_stations" />
         </LinearLayout>
-
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_menu"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

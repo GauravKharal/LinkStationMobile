@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/dashboard_outlined"
+        android:title="@string/dashboard" />
+    <item
+        android:id="@+id/stations"
+        android:icon="@drawable/stations_outlined"
+        android:title="@string/stations" />
+    <item
+        android:id="@+id/create"
+        android:icon="@drawable/create_outlined"
+        android:title="@string/create" />
+    <item
+        android:id="@+id/analytics"
+        android:icon="@drawable/analytics_outlined"
+        android:title="@string/analytics" />
+    <item
+        android:id="@+id/earn"
+        android:icon="@drawable/earn_outlined"
+        android:title="@string/earn" />
+</menu>
