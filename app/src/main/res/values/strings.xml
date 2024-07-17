@@ -26,5 +26,6 @@
     <string name="views_count">380k</string>
     <string name="clicks_count">14.2k</string>
     <string name="logo">Logo</string>
+    <string name="latest_published_stations">Latest Published Stations</string>
 
 </resources>

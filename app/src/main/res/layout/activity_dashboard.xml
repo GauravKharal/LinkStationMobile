@@ -26,20 +26,24 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+
+<!--    MAIN CONTENT   -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="18dp"
         android:paddingHorizontal="25dp"
         app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+<!--        USER INFORMATION / DASHBOARD HEADER      -->
         <LinearLayout
             android:id="@+id/dashboard_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dashboard_header"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:paddingTop="12dp"
-            android:paddingRight="18dp"
+            android:paddingEnd="18dp"
             android:paddingBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -54,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 >
                 <TextView
                     android:layout_width="match_parent"
@@ -83,6 +87,8 @@
 
         </LinearLayout>
 
+
+<!--        ACCOUNT ANALYTICS      -->
         <LinearLayout
             android:id="@+id/account_analytics"
             android:layout_width="match_parent"
@@ -124,7 +130,7 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="25dp"
                     android:paddingVertical="15dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1">
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,7 +153,7 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="25dp"
                     android:paddingVertical="15dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="1">
                     <TextView
                         android:layout_width="wrap_content"
@@ -169,6 +175,46 @@
 
 
         </LinearLayout>
+
+
+        <!--        LATEST PUBLISHED STATIONS        -->
+        <LinearLayout
+            android:id="@+id/latest_published_stations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/account_analytics">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_medium"
+                    android:text="@string/latest_published_stations"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/latest_published_stations_recyclerView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
