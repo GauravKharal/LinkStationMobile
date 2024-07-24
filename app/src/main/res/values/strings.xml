@@ -29,6 +29,7 @@
     <string name="latest_published_stations">Latest Published Stations</string>
     <string name="station_url">Station URL</string>
     <string name="station_title">Station Title</string>
-
+    <string name="email">Email</string>
+    <string name="register">Register</string>
 
 </resources>

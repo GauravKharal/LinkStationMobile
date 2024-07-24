@@ -1,4 +1,4 @@
-package com.example.linkstation;
+package com.example.linkstation.ui;
 
 import android.os.Bundle;
 
@@ -11,7 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.linkstation.R;
 import com.example.linkstation.databinding.ActivityMainBinding;
+import com.example.linkstation.ui.AnalyticsFragment;
+import com.example.linkstation.ui.DashboardFragment;
+import com.example.linkstation.ui.EarnFragment;
+import com.example.linkstation.ui.StationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 

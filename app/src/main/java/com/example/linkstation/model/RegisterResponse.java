@@ -1,6 +1,7 @@
-package com.example.linkstation;
+// RegisterResponse.java
+package com.example.linkstation.model;
 
-public class LoginResponse {
+public class RegisterResponse {
     private boolean success;
     private String message;
 
@@ -11,4 +12,6 @@ public class LoginResponse {
     public String getMessage() {
         return message;
     }
+
+    // You can add setters if needed
 }

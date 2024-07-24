@@ -1,4 +1,4 @@
-package com.example.linkstation;
+package com.example.linkstation.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.linkstation.Constants;
+import com.example.linkstation.R;
+import com.example.linkstation.Station;
+import com.example.linkstation.StationAdapter;
 
 import java.util.List;
 

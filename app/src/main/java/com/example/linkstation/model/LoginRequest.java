@@ -1,4 +1,4 @@
-package com.example.linkstation;
+package com.example.linkstation.model;
 
 public class LoginRequest {
     private String username;
@@ -9,5 +9,4 @@ public class LoginRequest {
         this.password = password;
     }
 
-    // Getters and setters
 }
