@@ -12,7 +12,7 @@ public class NetworkClient {
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://mint-briefly-cheetah.ngrok-free.app";
 
-    public static Retrofit getService(Context context) {
+    public static Retrofit getRetrofitClient(Context context) {
         if (retrofit == null) {
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(new ChuckerInterceptor(context))
