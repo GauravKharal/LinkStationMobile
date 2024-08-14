@@ -24,4 +24,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:paddingHorizontal">15dp</item>
     </style>
+    <style name="bottomNavSelected">
+        <item name="android:fontFamily">@font/space_grotesk_bold</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="bottomNav">
+        <item name="android:fontFamily">@font/space_grotesk</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>
