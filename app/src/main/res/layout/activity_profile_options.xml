@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/space_grotesk"
                         android:text="@string/username"
-                        android:textColor="#60000000"
+                        android:textColor="#70000000"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -126,7 +126,8 @@
                         android:fontFamily="@font/space_mono"
                         android:text="@string/edit_profile"
                         android:textColor="#000000"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_gravity="center_vertical"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,7 +152,8 @@
                         android:fontFamily="@font/space_mono"
                         android:text="@string/change_password"
                         android:textColor="#000000"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_gravity="center_vertical"/>
                 </LinearLayout>
 
             </LinearLayout>
