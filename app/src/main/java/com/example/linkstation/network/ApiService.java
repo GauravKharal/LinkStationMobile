@@ -1,9 +1,8 @@
 package com.example.linkstation.network;
 
 import com.example.linkstation.model.LoginRequest;
-import com.example.linkstation.model.LoginResponse;
 import com.example.linkstation.model.RegisterRequest;
-import com.example.linkstation.model.RegisterResponse;
+import com.example.linkstation.model.UserModel;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -14,10 +13,10 @@ import retrofit2.http.POST;
 
 public interface ApiService {
     @POST("/api/v1/users/login")
-    Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+    Call<UserModel> loginUser(@Body LoginRequest loginRequest);
 
     @POST("/api/v1/users/register")
-    Call<RegisterResponse> registerUser(@Body RegisterRequest registerRequest);
+    Call<UserModel> registerUser(@Body RegisterRequest registerRequest);
 
     @GET("/endpoint")
     Call<ResponseBody> getEndpointData();
