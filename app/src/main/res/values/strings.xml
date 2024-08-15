@@ -31,5 +31,9 @@
     <string name="station_title">Station Title</string>
     <string name="email">Email</string>
     <string name="register">Register</string>
+    <string name="logout">Log Out</string>
+    <string name="fullName">Dipak Kumar Kalwar</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
 
 </resources>
