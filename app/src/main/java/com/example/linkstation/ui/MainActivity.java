@@ -1,5 +1,6 @@
 package com.example.linkstation.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new EarnFragment());
             }
             return true;
+        });
+
+        findViewById(R.id.btnProfileOptions).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ProfileOptionsActivity.class);
+            startActivity(intent);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
