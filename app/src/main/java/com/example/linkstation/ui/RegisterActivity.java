@@ -17,10 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.linkstation.network.DataRepository;
 import com.example.linkstation.R;
 import com.example.linkstation.model.RegisterRequest;
-import com.example.linkstation.model.RegisterResponse;
+import com.example.linkstation.model.UserModel;
+import com.example.linkstation.network.ApiService;
+import com.example.linkstation.network.RetrofitClient;
+import com.example.linkstation.utility.TokenManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,13 +30,9 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText emailEditText;
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private EditText confirmPasswordEditText;
+    private EditText etEmail, etUsername, etPassword, etConfirmPassword;
     private ProgressBar progressBar;
     private FrameLayout progressOverlay;
-    private DataRepository dataRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,42 +40,28 @@ public class RegisterActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
 
-        emailEditText = findViewById(R.id.emailEditText);
-        usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.password);
-        confirmPasswordEditText = findViewById(R.id.confirmPassword);
+        etEmail = findViewById(R.id.etEmail);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
         progressBar = findViewById(R.id.progressBar);
         progressOverlay = findViewById(R.id.progressOverlay);
-        dataRepository = new DataRepository();
 
-        findViewById(R.id.registerButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser();
-            }
-        });
 
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish(); // Optional: Close the RegisterActivity to prevent going back to it with back button
-            }
-        });
+        findViewById(R.id.btnRegister).setOnClickListener(v -> registerUser());
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        findViewById(R.id.tvLogin).setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
     private void registerUser() {
-        String email = emailEditText.getText().toString().trim();
-        String username = usernameEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
-        String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String username = etUsername.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
             Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
@@ -91,47 +75,43 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Show progress bar and overlay, and disable register button
         progressOverlay.setVisibility(View.VISIBLE);
-        findViewById(R.id.registerButton).setEnabled(false);
+        findViewById(R.id.btnRegister).setEnabled(false);
 
         RegisterRequest registerRequest = new RegisterRequest(email, username, password);
 
-        dataRepository.registerUser(registerRequest).enqueue(new Callback<RegisterResponse>() {
+        ApiService apiService = RetrofitClient.getClient(RegisterActivity.this).create(ApiService.class);
+        Call<UserModel> call = apiService.registerUser(registerRequest);
+        call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(@NonNull Call<RegisterResponse> call, @NonNull Response<RegisterResponse> response) {
-                // Hide progress bar and overlay, and enable register button
-                progressOverlay.setVisibility(View.GONE);
-                findViewById(R.id.registerButton).setEnabled(true);
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
+                if (response.isSuccessful()){
+                    UserModel userModelResponse = response.body();
+                    if (userModelResponse != null && userModelResponse.getData() != null){
 
-                if (response.isSuccessful()) {
-                    RegisterResponse registerResponse = response.body();
-                    if (registerResponse != null && registerResponse.isSuccess()) {
-                        // Registration successful
-                        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                            String accessToken = userModelResponse.getData().getAccessToken();
+                            String refreshToken = userModelResponse.getData().getRefreshToken();
+                            TokenManager.saveToken(getApplicationContext(),accessToken,refreshToken);
+                            Intent registerIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(registerIntent);
+                            finish();
 
-                        // Proceed to next activity (Login Activity)
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish(); // Optional: Close the RegisterActivity to prevent going back to it with back button
-                    } else {
-                        // Registration failed
-                        String errorMessage = (registerResponse != null ? registerResponse.getMessage() : "Unknown error");
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+
                     }
-                } else {
-                    // Response not successful
-                    Toast.makeText(RegisterActivity.this, "Response error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(RegisterActivity.this,"Registration Failed",Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
-            public void onFailure(@NonNull Call<RegisterResponse> call, @NonNull Throwable t) {
-                // Hide progress bar and overlay, and enable register button
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                 progressOverlay.setVisibility(View.GONE);
-                findViewById(R.id.registerButton).setEnabled(true);
-
-                // Network error
-                Toast.makeText(RegisterActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                findViewById(R.id.btnRegister).setEnabled(true);
+                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 }
