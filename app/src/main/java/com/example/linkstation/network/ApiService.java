@@ -1,6 +1,7 @@
 package com.example.linkstation.network;
 
 import com.example.linkstation.model.LoginRequest;
+import com.example.linkstation.model.RefreshTokenRequest;
 import com.example.linkstation.model.RegisterRequest;
 import com.example.linkstation.model.UserModel;
 
@@ -9,6 +10,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface ApiService {
@@ -18,8 +20,11 @@ public interface ApiService {
     @POST("/api/v1/users/register")
     Call<UserModel> registerUser(@Body RegisterRequest registerRequest);
 
-    @GET("/api/v1/users/logout")
-    Call<Void> logoutUser();
+    @POST("/api/v1/users/logout")
+    Call<UserModel> logoutUser(@Header("Authorization") String token);
+
+    @POST("/api/v1/users/refresh-token")
+    Call<UserModel> refreshToken(@Body RefreshTokenRequest refreshTokenRequest);
 
     @GET("/endpoint")
     Call<ResponseBody> getEndpointData();
