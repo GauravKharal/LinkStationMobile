@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        findViewById(R.id.create).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateStationActivity.class);
+            startActivity(intent);
+        });
+
         findViewById(R.id.btnProfileOptions).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ProfileOptionsActivity.class);
             startActivity(intent);
