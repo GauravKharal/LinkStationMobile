@@ -16,6 +16,9 @@
         android:theme="@style/Theme.LinkStation"
         tools:targetApi="31">
         <activity
+            android:name=".ui.CreatePage"
+            android:exported="false" />
+        <activity
             android:name=".ui.ProfileOptionsActivity"
             android:exported="false" />
         <activity
