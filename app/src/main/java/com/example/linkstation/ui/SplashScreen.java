@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.linkstation.R;
+import com.example.linkstation.network.ApiService;
+import com.example.linkstation.network.RetrofitClient;
 import com.example.linkstation.utility.TokenManager;
 
 public class SplashScreen extends AppCompatActivity {
@@ -38,8 +40,21 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 Intent intent;
                 if (accessToken != null) {
-                    // Token exists, user is already logged in
-                    intent = new Intent(SplashScreen.this, MainActivity.class);
+                    if (TokenManager.isAccessTokenExpired(SplashScreen.this)) {
+                        try {
+                            ApiService apiService = RetrofitClient.getClient(SplashScreen.this).create(ApiService.class);
+                            TokenManager.refreshToken(SplashScreen.this, apiService);
+                        } catch (Exception e) {
+                            TokenManager.clearToken(getApplicationContext());
+                            intent = new Intent(SplashScreen.this, LoginActivity.class);
+                        }
+
+                    } else {
+                        // Token exists, user is already logged in
+                        intent = new Intent(SplashScreen.this, MainActivity.class);
+
+                    }
+
                 } else {
                     // No token, user needs to log in
                     intent = new Intent(SplashScreen.this, LoginActivity.class);
@@ -47,7 +62,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-             // Finish SplashScreen activity so the user can't navigate back to it
+            // Finish SplashScreen activity so the user can't navigate back to it
         }, 2000);  // 2000 milliseconds = 2 seconds delay
 
     }

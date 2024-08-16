@@ -7,10 +7,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.linkstation.model.RefreshTokenRequest;
 import com.example.linkstation.model.UserModel;
 import com.example.linkstation.network.ApiService;
 import com.example.linkstation.network.RetrofitClient;
+
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,5 +74,20 @@ public class TokenManager {
         editor.remove(REFRESH_TOKEN_KEY);
         editor.apply();
     }
+
+    public static boolean isAccessTokenExpired(Context context){
+        String accessToken = getAccessToken(context);
+        if(accessToken == null){
+            return true;
+        }
+        try{
+            DecodedJWT jwt = JWT.decode(accessToken);
+            Date expiresAt = jwt.getExpiresAt();
+            return expiresAt != null && expiresAt.before(new Date());
+        }catch (JWTDecodeException e){
+            return true;
+        }
+    }
+
 
 }
