@@ -18,6 +18,9 @@ public interface ApiService {
     @POST("/api/v1/users/register")
     Call<UserModel> registerUser(@Body RegisterRequest registerRequest);
 
+    @GET("/api/v1/users/logout")
+    Call<Void> logoutUser();
+
     @GET("/endpoint")
     Call<ResponseBody> getEndpointData();
 
