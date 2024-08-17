@@ -1,11 +1,20 @@
 package com.example.linkstation.ui;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,13 +27,10 @@ import com.example.linkstation.utility.TokenManager;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final String PREFS_NAME = "MyAppPrefs";
-    private static final String ACCESS_TOKEN_KEY = "accessToken";
-    private static final String REFRESH_TOKEN_KEY = "refreshToken";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
     }
 
@@ -33,12 +39,16 @@ public class SplashScreen extends AppCompatActivity {
         super.onStart();
         // Check login status
 
+        if (!isNetworkAvailable()) {
+            showNoInternetDialog();
+            return;
+        }
         String accessToken = TokenManager.getAccessToken(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent;
+                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 if (accessToken != null) {
                     if (TokenManager.isAccessTokenExpired(SplashScreen.this)) {
                         try {
@@ -66,5 +76,31 @@ public class SplashScreen extends AppCompatActivity {
         }, 2000);  // 2000 milliseconds = 2 seconds delay
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            Network network = connectivityManager.getActiveNetwork();
+            if (network == null) {
+                return false;
+            }
+            NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+            return networkCapabilities != null && (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
+
+
+        }
+        return false;
+    }
+
+    private void showNoInternetDialog() {
+        new AlertDialog.Builder(this).setTitle("No Internet Connection").setMessage("It looks like your internet connection is off. Please turn it on and try again.").setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        }).setCancelable(false).show();
+    }
+
 
 }
