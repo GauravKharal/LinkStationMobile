@@ -50,7 +50,7 @@ public class ProfileOptionsActivity extends AppCompatActivity {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
     }
@@ -62,10 +62,6 @@ public class ProfileOptionsActivity extends AppCompatActivity {
         ApiService apiService = RetrofitClient.getClient(ProfileOptionsActivity.this).create(ApiService.class);
 
         String accessToken = TokenManager.getAccessToken(ProfileOptionsActivity.this);
-        if (isTokenExpired(accessToken)) {
-            TokenManager.refreshToken(ProfileOptionsActivity.this, apiService);
-            accessToken = TokenManager.getAccessToken(ProfileOptionsActivity.this);
-        }
 
         Call<UserModel> call = apiService.logoutUser(accessToken);
         call.enqueue(new Callback<UserModel>() {
@@ -86,15 +82,6 @@ public class ProfileOptionsActivity extends AppCompatActivity {
                 Toast.makeText(ProfileOptionsActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private boolean isTokenExpired(String accessToken) {
-        try {
-            DecodedJWT jwt = JWT.decode(accessToken);
-            return jwt.getExpiresAt().before(new Date());
-        } catch (JWTDecodeException e) {
-            return true;
-        }
     }
 
 
