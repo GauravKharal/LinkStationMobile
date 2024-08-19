@@ -2,13 +2,22 @@ package com.example.linkstation.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.linkstation.Constants;
 import com.example.linkstation.R;
+import com.example.linkstation.station.Station;
+import com.example.linkstation.station.StationAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,5 +71,20 @@ public class StationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_stations, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        List<Station> stations = Constants.getStations();
+        int layout = R.layout.green_stations_list;
+
+        StationAdapter stationAdapter = new StationAdapter(stations, layout);
+
+        RecyclerView recyclerView = view.findViewById(R.id.rvStations);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        recyclerView.setAdapter(stationAdapter);
     }
 }

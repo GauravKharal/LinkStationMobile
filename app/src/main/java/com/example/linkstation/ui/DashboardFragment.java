@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.linkstation.Constants;
 import com.example.linkstation.R;
-import com.example.linkstation.Station;
-import com.example.linkstation.StationAdapter;
+import com.example.linkstation.station.Station;
+import com.example.linkstation.station.StationAdapter;
 
 import java.util.List;
 
@@ -71,8 +71,9 @@ public class DashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         List<Station> stations = Constants.getStations();
+        int layout = R.layout.latest_published_stations;
 
-        StationAdapter stationAdapter = new StationAdapter(stations);
+        StationAdapter stationAdapter = new StationAdapter(stations,layout);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.latest_published_stations_recyclerView);

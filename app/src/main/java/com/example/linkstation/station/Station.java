@@ -1,4 +1,4 @@
-package com.example.linkstation;
+package com.example.linkstation.station;
 
 import java.io.Serializable;
 

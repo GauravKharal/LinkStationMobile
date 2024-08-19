@@ -4,5 +4,6 @@
         <item>@font/space_grotesk</item>
         <item>@font/space_grotesk_bold</item>
         <item>@font/space_mono</item>
+        <item>@font/space_mono_bold</item>
     </array>
 </resources>
