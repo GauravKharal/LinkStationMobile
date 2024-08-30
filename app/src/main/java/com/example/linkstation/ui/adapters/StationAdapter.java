@@ -1,4 +1,4 @@
-package com.example.linkstation.station;
+package com.example.linkstation.ui.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.linkstation.R;
-import com.example.linkstation.model.Station;
 import com.example.linkstation.model.StationModel;
 
 import java.util.List;

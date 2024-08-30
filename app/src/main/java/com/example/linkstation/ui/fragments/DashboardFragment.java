@@ -17,7 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.example.linkstation.model.StationModel;
 import com.example.linkstation.R;
-import com.example.linkstation.station.StationAdapter;
+import com.example.linkstation.ui.adapters.StationAdapter;
 import com.example.linkstation.utilities.TokenManager;
 import com.example.linkstation.ui.viewmodels.DashboardViewModel;
 
