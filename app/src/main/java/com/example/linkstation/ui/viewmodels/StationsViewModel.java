@@ -30,7 +30,7 @@ public class StationsViewModel extends ViewModel {
 
 
 
-    public void fetchStations(String token, int page, int size, Context context) {
+    public void fetchRecentStations(String token, int page, int size, Context context) {
         ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
         Call<StationModel> call = apiService.getLatestPublishedStations(token, page, size);
         call.enqueue(new Callback<StationModel>() {

@@ -22,22 +22,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
         <TextView
-            android:id="@+id/views_tab"
+            android:id="@+id/recents_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/tab_backsection"
+            android:background="@drawable/tab_blacksection"
             android:gravity="left"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
-            android:text="@string/views"
+            android:text="Recents"
             android:textColor="#ffdc01" />
-
         <TextView
-            android:id="@+id/recent_tab"
+            android:id="@+id/views_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -47,8 +47,10 @@
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
-            android:text="Recent"
-            android:textColor="@android:color/black" />
+            android:text="@string/views"
+            android:textColor="#000000" />
+
+
 
         <TextView
             android:id="@+id/visibility_tab"
@@ -62,6 +64,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="Visibility"
+            android:visibility="gone"
             android:textColor="@android:color/black" />
     </LinearLayout>
 
