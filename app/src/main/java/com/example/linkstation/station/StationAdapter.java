@@ -1,23 +1,27 @@
 package com.example.linkstation.station;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.linkstation.R;
+import com.example.linkstation.model.Station;
+import com.example.linkstation.model.StationModel;
 
 import java.util.List;
 
 public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationViewHolder> {
-    private final List<Station> stations;
+    private final List<StationModel.Data.Station> stations;
     private final int layout;
 
-    public StationAdapter(List<Station> stations, int layout){
+    public StationAdapter(List<StationModel.Data.Station> stations, int layout){
         this.stations = stations;
         this.layout = layout;
     }
@@ -32,9 +36,16 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
 
     @Override
     public void onBindViewHolder(@NonNull StationViewHolder holder, int position) {
-        Station currentStation = stations.get(position);
-        holder.stationURL.setText(currentStation.getStationURL());
+        StationModel.Data.Station currentStation = stations.get(position);
+        holder.stationURL.setText(currentStation.getStationUrl());
         holder.stationTitle.setText(currentStation.getStationTitle());
+        Glide.with(holder.itemView.getContext())
+                .load(currentStation.getImage())
+                .into(holder.stationImage);
+
+        Log.d("onBindViewHolder: ", "Station URL: " + currentStation.getStationUrl());
+        Log.d("onBindViewHolder: ", "Station Title: " + currentStation.getStationTitle());
+        Log.d("onBindViewHolder: ", "Station Image: " + currentStation.getImage());
     }
 
     @Override
@@ -43,18 +54,23 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
     }
 
     public static class StationViewHolder extends RecyclerView.ViewHolder {
-        private final TextView stationURL; // Declare as final
-        private final TextView stationTitle; // Declare as final
+        private final TextView stationURL;
+        private final TextView stationTitle;
+        private final ImageView stationImage;
 
         public StationViewHolder(@NonNull View stationView) {
             super(stationView);
             stationURL = stationView.findViewById(R.id.stationURL);
             stationTitle = stationView.findViewById(R.id.stationTitle);
+            stationImage = stationView.findViewById(R.id.stationImage);
         }
 
-        public void bind(Station station) { // Binding method in ViewHolder
-            stationURL.setText(station.getStationURL());
+        public void bind(StationModel.Data.Station station) { // Binding method in ViewHolder
+            stationURL.setText(station.getStationUrl());
             stationTitle.setText(station.getStationTitle());
+            Glide.with(itemView.getContext())
+                    .load(station.getStationImage())
+                    .into(stationImage);
         }
     }
 }

@@ -2,6 +2,8 @@ package com.example.linkstation.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class UserModel {
     private String statusCode, message;
     private boolean success;
@@ -83,6 +85,10 @@ public class UserModel {
         private String username;
         private String email;
 
+        private String fullName;
+        private String avatar;
+        private Date dateOfBirth;
+
         @SerializedName("createdAt")
         private String createdAt;
 
@@ -113,6 +119,23 @@ public class UserModel {
         public void setEmail(String email) {
             this.email = email;
         }
+
+        public String getFullName() {
+            return fullName;
+        }
+
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
+        }
+        public String getAvatar() {
+            return avatar;
+        }
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
+        }
+
+        public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+        public Date getDateOfBirth() { return dateOfBirth; }
 
         public String getCreatedAt() {
             return createdAt;

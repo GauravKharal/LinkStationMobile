@@ -53,4 +53,21 @@
         <item name="android:paddingHorizontal">20dp</item>
         <item name="android:paddingVertical">10dp</item>
     </style>
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item> <!-- Remove the default background -->
+        <item name="android:windowNoTitle">true</item> <!-- Remove the default title -->
+        <item name="android:padding">0dp</item> <!-- Cancel default padding -->
+        <!-- Add more attributes to cancel or override as needed -->
+    </style>
+    <style name="buttonTransparentWhite">
+        <item name="android:background">@drawable/button_transparent_grey</item>
+        <item name="android:textColor">#ffdc01</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppTheme.Picker" parent="Theme.LinkStation" >
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
 </resources>

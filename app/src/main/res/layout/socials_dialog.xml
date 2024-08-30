@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/add_link_dialog_bg"
+    android:padding="25dp">
+
+    <LinearLayout
+        android:id="@+id/instagram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/ivInstagram"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_instagram"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#A0000000"/>
+        <EditText
+            android:id="@+id/etInstagram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_link_et"
+            android:fontFamily="@font/space_mono_bold"
+            android:hint="Instagram Username"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="#80000000"
+            android:textColor="#000000"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instagram">
+        <ImageView
+            android:id="@+id/ivFacebook"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_facebook"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#A0000000"/>
+        <EditText
+            android:id="@+id/etFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_link_et"
+            android:fontFamily="@font/space_mono_bold"
+            android:hint="Facebook Username"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="#80000000"
+            android:textColor="#000000"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facebook">
+        <ImageView
+            android:id="@+id/ivTwitter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_twitter"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#A0000000"/>
+        <EditText
+            android:id="@+id/etTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_link_et"
+            android:fontFamily="@font/space_mono_bold"
+            android:hint="Twitter Username"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="#80000000"
+            android:textColor="#000000"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/youtube"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/twitter">
+        <ImageView
+            android:id="@+id/ivYoutube"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_youtube"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#A0000000"/>
+        <EditText
+            android:id="@+id/etYoutube"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_link_et"
+            android:fontFamily="@font/space_mono_bold"
+            android:hint="Youtube Username"
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="#80000000"
+            android:textColor="#000000"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+            />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/youtube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTick"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="@drawable/add_link_tick_btn"
+            android:layout_weight="1"
+            android:shadowColor="@android:color/transparent"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCross"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/add_link_cross_btn"
+            android:layout_weight="1"
+            android:shadowColor="@android:color/transparent" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

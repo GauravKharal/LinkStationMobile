@@ -15,21 +15,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LinkStation"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.CreateStationActivity"
+            android:name=".ui.activities.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ProfileOptionsActivity"
+            android:name=".ui.activities.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".ui.activities.CreateStationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ProfileOptionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".ui.activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true" />
 
         <meta-data

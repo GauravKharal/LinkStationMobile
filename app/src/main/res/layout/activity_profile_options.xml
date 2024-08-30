@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProfileOptionsActivity">
+    tools:context=".ui.activities.ProfileOptionsActivity">
 
 
     <!-- TOP BAR -->
@@ -61,11 +61,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/round_images_border" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_images_border"
+                    android:clipToOutline="true">
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/round_images_border"
+                        android:scaleType="centerCrop"/>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -80,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/space_grotesk_bold"
-                        android:text="@string/fullName"
+                        android:text="Full Name"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
@@ -89,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/space_grotesk"
-                        android:text="@string/username"
+                        android:text="Username"
                         android:textColor="#70000000"
                         android:textSize="16sp" />
 

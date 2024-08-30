@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid
-        android:color="#ffffff"/>
-    <stroke
-        android:width="2dp"
-        android:color="#d9d9d9"/>
-    <corners
-        android:radius="500dp"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape >
+            <solid
+                android:color="#ffffff"/>
+            <stroke
+                android:width="2dp"
+                android:color="#d9d9d9"/>
+            <corners
+                android:radius="500dp"/>
+        </shape>
+    </item>
+    <item android:width="50dp"
+          android:height="50dp"
+        android:gravity="center">
+        <bitmap android:src="@drawable/person"/>
+    </item>
+</layer-list>

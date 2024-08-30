@@ -47,6 +47,15 @@ dependencies {
     implementation("com.auth0:java-jwt:4.2.1")
     implementation("com.auth0.android:jwtdecode:2.0.1")
 
+    implementation("androidx.work:work-runtime:2.7.1")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+
+
+
 
 
 
