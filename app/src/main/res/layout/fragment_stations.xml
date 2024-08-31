@@ -48,7 +48,8 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/views"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:enabled="false"/>
 
 
 
@@ -131,21 +132,22 @@
 
             <!--            Stations List-->
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:verticalScrollbarPosition="defaultPosition"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/your_stations_section">
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvStations"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/green_stations_list" />
-            </ScrollView>
+                    android:layout_height="0dp"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="outsideInset"
+                    android:scrollbarFadeDuration="5000000"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    tools:listitem="@layout/green_stations_list"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/your_stations_section" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

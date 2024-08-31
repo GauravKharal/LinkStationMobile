@@ -18,26 +18,49 @@ import retrofit2.Response;
 
 public class StationsViewModel extends ViewModel {
 
-    private MutableLiveData<List<StationModel.Data.Station>> stationsLiveData;
+    private MutableLiveData<List<StationModel.Data.Station>> latestStationsLiveData;
+    private MutableLiveData<List<StationModel.Data.Station>> popularStationsLiveData;
 
     public StationsViewModel() {
-        stationsLiveData = new MutableLiveData<>();
+        latestStationsLiveData = new MutableLiveData<>();
+        popularStationsLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<List<StationModel.Data.Station>> getStations() {
-        return stationsLiveData;
+    public LiveData<List<StationModel.Data.Station>> getLatestStations() {
+        return latestStationsLiveData;
+    }
+    public LiveData<List<StationModel.Data.Station>> getPopularStations() {
+        return popularStationsLiveData;
     }
 
 
 
-    public void fetchRecentStations(String token, int page, int size, Context context) {
+    public void fetchLatestStations(String token, int page, int size, Context context) {
         ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
         Call<StationModel> call = apiService.getLatestPublishedStations(token, page, size);
         call.enqueue(new Callback<StationModel>() {
             @Override
             public void onResponse(Call<StationModel> call, Response<StationModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    stationsLiveData.postValue(response.body().getData().getStations());
+                    latestStationsLiveData.postValue(response.body().getData().getStations());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StationModel> call, Throwable throwable) {
+                // Handle failure
+            }
+        });
+    }
+
+    public void fetchPopularStations(String token, int page, int size, Context context) {
+        ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
+        Call<StationModel> call = apiService.getMostViewedStations(token,page,size);
+        call.enqueue(new Callback<StationModel>() {
+            @Override
+            public void onResponse(Call<StationModel> call, Response<StationModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    popularStationsLiveData.postValue(response.body().getData().getStations());
                 }
             }
 

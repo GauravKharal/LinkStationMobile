@@ -2,6 +2,7 @@ package com.example.linkstation.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -402,6 +403,8 @@ public class EditProfileActivity extends AppCompatActivity {
             if (Boolean.TRUE.equals(success)) {
                 // Update was successful
                 finish();
+                ProfileOptionsActivity profileOptionsActivity = new ProfileOptionsActivity();
+                profileOptionsActivity.refreshData();
                 Toast.makeText(this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
             } else {
                 // Update failed

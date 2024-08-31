@@ -25,8 +25,12 @@ import java.util.List;
 
 public class StationsFragment extends Fragment {
 
-    private List<StationModel.Data.Station> stationList = new ArrayList<>();
-    private StationAdapter stationAdapter;
+    private List<StationModel.Data.Station> recentStationsList = new ArrayList<>();
+    private List<StationModel.Data.Station> popularStationsList = new ArrayList<>();
+
+    private StationAdapter recentAdapter;
+    private StationAdapter popularAdapter;
+
     private RecyclerView recyclerView;
 
     private StationsViewModel stationsViewModel;
@@ -36,22 +40,19 @@ public class StationsFragment extends Fragment {
 
     private String token;
 
+    private int page1 = 1;
+    private int page2 = 1;
+    private final int size = 10;
 
-    private int page = 1;
-    private int size = 10;
+    private boolean isRecentsSelected = true;
 
-
-    public StationsFragment() {
-    }
-
+    public StationsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         stationsViewModel = new ViewModelProvider(this).get(StationsViewModel.class);
-
         token = TokenManager.getAccessToken(getActivity());
-        stationsViewModel.fetchRecentStations(token,page , size, getActivity());
     }
 
     @Override
@@ -63,28 +64,66 @@ public class StationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeVariables(view);
-        handleTabs();
         setupRecyclerView();
-
-        stationsViewModel.getStations().observe(getViewLifecycleOwner(), stations -> {
-            stationList.clear();
-            stationList.addAll(stations);
-            stationAdapter.notifyDataSetChanged();
-        });
+        handleTabs();
+        loadInitialData();
     }
 
     private void initializeVariables(View view) {
         recentsTab = view.findViewById(R.id.recents_tab);
         viewsTab = view.findViewById(R.id.views_tab);
-        switchTab(recentsTab, viewsTab);
+        switchTab(isRecentsSelected ? recentsTab : viewsTab, isRecentsSelected ? viewsTab : recentsTab);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView = getView().findViewById(R.id.rvStations);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Initialize adapters for both recent and popular lists
+        recentAdapter = new StationAdapter(recentStationsList, R.layout.green_stations_list);
+        popularAdapter = new StationAdapter(popularStationsList, R.layout.green_stations_list);
+
+        // Set the initial adapter
+        recyclerView.setAdapter(isRecentsSelected ? recentAdapter : popularAdapter);
+
+        recyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (!recyclerView.canScrollVertically(1)) {
+                if (isRecentsSelected) {
+                    page1++;
+                    stationsViewModel.fetchLatestStations(token, page1, size, getActivity());
+                }else{
+                    page2++;
+                    stationsViewModel.fetchPopularStations(token, page2, size, getActivity());
+                }
+            }
+        });
     }
 
     private void handleTabs() {
         recentsTab.setOnClickListener(v -> {
-            switchTab(recentsTab, viewsTab);
+            if (!isRecentsSelected) {
+                isRecentsSelected = true;
+                switchTab(recentsTab, viewsTab);
+                recyclerView.setAdapter(recentAdapter);  // Set the adapter for recent stations
+                if (recentStationsList.isEmpty()) {
+                    stationsViewModel.fetchLatestStations(token, page1, size, getActivity());
+                } else {
+                    recentAdapter.notifyDataSetChanged();
+                }
+            }
         });
+
         viewsTab.setOnClickListener(v -> {
-            switchTab(viewsTab, recentsTab);
+            if (isRecentsSelected) {
+                isRecentsSelected = false;
+                switchTab(viewsTab, recentsTab);
+                recyclerView.setAdapter(popularAdapter);  // Set the adapter for popular stations
+                if (popularStationsList.isEmpty()) {
+                    stationsViewModel.fetchPopularStations(token, page2, size, getActivity());
+                } else {
+                    popularAdapter.notifyDataSetChanged();
+                }
+            }
         });
     }
 
@@ -97,11 +136,18 @@ public class StationsFragment extends Fragment {
         otherTab.setTextColor(Color.parseColor("#000000"));
     }
 
-    private void setupRecyclerView() {
-        recyclerView = getView().findViewById(R.id.rvStations);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    private void loadInitialData() {
+            stationsViewModel.fetchLatestStations(token, page1, size, getActivity());
+            stationsViewModel.getLatestStations().observe(getViewLifecycleOwner(), stations -> {
+                recentStationsList.addAll(stations);
+                recentAdapter.notifyDataSetChanged();
+            });
 
-        stationAdapter = new StationAdapter(stationList, R.layout.green_stations_list);
-        recyclerView.setAdapter(stationAdapter);
+            stationsViewModel.fetchPopularStations(token, page2, size, getActivity());
+            stationsViewModel.getPopularStations().observe(getViewLifecycleOwner(), stations -> {
+                popularStationsList.addAll(stations);
+                popularAdapter.notifyDataSetChanged();
+            });
+
     }
 }

@@ -3,6 +3,7 @@ package com.example.linkstation.model;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class StationModel implements Serializable {
@@ -125,6 +126,15 @@ public class StationModel implements Serializable {
             @SerializedName("visibility")
             private boolean visibility;
 
+            @SerializedName("views")
+            private int views;
+
+            @SerializedName("clicks")
+            private int clicks;
+
+            @SerializedName("shares")
+            private int shares;
+
             // Constructor
             public Station(String stationUrl, String stationTitle, String stationDescription, File stationImage, String image, boolean visibility, String instagram, String twitter, String facebook, String youtube) {
                 this.stationUrl = stationUrl;
@@ -219,6 +229,31 @@ public class StationModel implements Serializable {
             public void setYoutube(String youtube) {
                 this.youtube = youtube;
             }
+
+            public int getViews() {
+                return views;
+            }
+
+            public void setViews(int views) {
+                this.views = views;
+            }
+
+            public void setClicks(int clicks) {
+                this.clicks = clicks;
+            }
+
+            public int getClicks() {
+                return clicks;
+            }
+
+            public int getShares() {
+                return shares;
+            }
+
+            public void setShares(int shares) {
+                this.shares = shares;
+            }
+
         }
 
         public static class Link implements Serializable {

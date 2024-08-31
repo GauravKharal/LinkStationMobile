@@ -17,6 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.linkstation.R;
@@ -40,6 +41,8 @@ public class ProfileOptionsActivity extends AppCompatActivity {
     private ImageView avatar;
     private DashboardViewModel dashboardViewModel;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class ProfileOptionsActivity extends AppCompatActivity {
         fullName = findViewById(R.id.fullName);
         username = findViewById(R.id.username);
         avatar = findViewById(R.id.avatar);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> refreshData());
 
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
@@ -132,6 +138,12 @@ public class ProfileOptionsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void refreshData() {
+        String token = TokenManager.getAccessToken(this);
+        dashboardViewModel.fetchUserDetails(token, this);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

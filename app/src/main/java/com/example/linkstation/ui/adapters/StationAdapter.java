@@ -25,6 +25,7 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
         this.layout = layout;
     }
 
+
     @NonNull
     @Override
     public StationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

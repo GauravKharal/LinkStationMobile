@@ -80,6 +80,11 @@ public interface ApiService {
     @GET("/api/v1/station/public")
     Call<StationModel> getLatestPublishedStations(@Header("Authorization") String token, @Query("page") int page, @Query("size") int size);
 
+    @GET("/api/v1/station/popular")
+    Call<StationModel> getMostViewedStations(@Header("Authorization") String token, @Query("page") int page, @Query("size") int size);
+
+
+
     @GET("/endpoint")
     Call<ResponseBody> getEndpointData();
 

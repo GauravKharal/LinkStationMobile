@@ -12,12 +12,15 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.linkstation.R;
 import com.example.linkstation.model.RegisterRequest;
 import com.example.linkstation.model.UserModel;
 import com.example.linkstation.network.ApiService;
 import com.example.linkstation.network.RetrofitClient;
+import com.example.linkstation.utilities.CustomDialog;
+import com.example.linkstation.utilities.CustomProgressDialog;
 import com.example.linkstation.utilities.TokenManager;
 
 import retrofit2.Call;
@@ -29,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etEmail, etUsername, etPassword, etConfirmPassword;
     private ProgressBar progressBar;
     private FrameLayout progressOverlay;
+    private ConstraintLayout main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         progressBar = findViewById(R.id.progressBar);
         progressOverlay = findViewById(R.id.progressOverlay);
+        main = findViewById(R.id.main);
 
 
         findViewById(R.id.btnRegister).setOnClickListener(v -> registerUser());
@@ -60,18 +65,32 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
+            CustomDialog dialog = new CustomDialog(this);
+            dialog.setTitle("Error")
+                    .setMessage("Please fill in all fields")
+                    .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                    .setNegativeButton(false, "", null)
+                    .show();
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            CustomDialog dialog = new CustomDialog(this);
+            dialog.setTitle("Error")
+                    .setMessage("Passwords do not match")
+                    .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                    .setNegativeButton(false, "", null)
+                    .show();
             return;
         }
 
-        // Show progress bar and overlay, and disable register button
-        progressOverlay.setVisibility(View.VISIBLE);
+        CustomProgressDialog progressDialog = new CustomProgressDialog(this);
+        progressDialog.setTitle("Registering User");
+        progressDialog.show();
+
+
         findViewById(R.id.btnRegister).setEnabled(false);
+        main.setEnabled(false);
 
         RegisterRequest registerRequest = new RegisterRequest(email, username, password);
 
@@ -80,31 +99,57 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     UserModel userModelResponse = response.body();
-                    if (userModelResponse != null && userModelResponse.getData() != null){
+                    if (userModelResponse != null && userModelResponse.getData() != null) {
 
-                            String accessToken = userModelResponse.getData().getAccessToken();
-                            String refreshToken = userModelResponse.getData().getRefreshToken();
-                            TokenManager.saveToken(getApplicationContext(),accessToken,refreshToken);
-                            Intent registerIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                            startActivity(registerIntent);
-                            finish();
+                        String accessToken = userModelResponse.getData().getAccessToken();
+                        String refreshToken = userModelResponse.getData().getRefreshToken();
+                        TokenManager.saveToken(RegisterActivity.this, accessToken, refreshToken);
+                        Intent registerIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(registerIntent);
+                        progressDialog.dismiss();
+                        findViewById(R.id.btnRegister).setEnabled(true);
+                        main.setEnabled(true);
+                        finish();
 
 
-                    }else{
-                        Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressDialog.dismiss();
+                        findViewById(R.id.btnRegister).setEnabled(true);
+                        main.setEnabled(true);
+                        CustomDialog dialog = new CustomDialog(RegisterActivity.this);
+                        dialog.setTitle("Error")
+                                .setMessage("Registration Failed")
+                                .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                                .setNegativeButton(false, "", null)
+                                .show();
 
                     }
-                }else{
-                    Toast.makeText(RegisterActivity.this,"Registration Failed",Toast.LENGTH_SHORT).show();
+                } else {
+                    progressDialog.dismiss();
+                    findViewById(R.id.btnRegister).setEnabled(true);
+                    main.setEnabled(true);
+                    CustomDialog dialog = new CustomDialog(RegisterActivity.this);
+                    dialog.setTitle("Error")
+                            .setMessage("Registration Failed")
+                            .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                            .setNegativeButton(false, "", null)
+                            .show();
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
-                progressOverlay.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                main.setEnabled(true);
                 findViewById(R.id.btnRegister).setEnabled(true);
-                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                CustomDialog dialog = new CustomDialog(RegisterActivity.this);
+                dialog.setTitle("Error")
+                        .setMessage("Registration Failed")
+                        .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                        .setNegativeButton(false, "", null)
+                        .show();
             }
         });
 
