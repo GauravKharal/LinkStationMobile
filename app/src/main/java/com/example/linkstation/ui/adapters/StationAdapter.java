@@ -42,10 +42,7 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
         Glide.with(holder.itemView.getContext())
                 .load(currentStation.getImage())
                 .into(holder.stationImage);
-
-        Log.d("onBindViewHolder: ", "Station URL: " + currentStation.getStationUrl());
-        Log.d("onBindViewHolder: ", "Station Title: " + currentStation.getStationTitle());
-        Log.d("onBindViewHolder: ", "Station Image: " + currentStation.getImage());
+        holder.viewsCount.setText(String.valueOf(currentStation.getViews()));
     }
 
     @Override
@@ -57,12 +54,14 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
         private final TextView stationURL;
         private final TextView stationTitle;
         private final ImageView stationImage;
+        private final TextView viewsCount;
 
         public StationViewHolder(@NonNull View stationView) {
             super(stationView);
             stationURL = stationView.findViewById(R.id.stationURL);
             stationTitle = stationView.findViewById(R.id.stationTitle);
             stationImage = stationView.findViewById(R.id.stationImage);
+            viewsCount = stationView.findViewById(R.id.viewsCount);
         }
 
         public void bind(StationModel.Data.Station station) { // Binding method in ViewHolder

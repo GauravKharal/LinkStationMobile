@@ -20,6 +20,8 @@ import com.example.linkstation.model.LoginRequest;
 import com.example.linkstation.model.UserModel;
 import com.example.linkstation.network.ApiService;
 import com.example.linkstation.network.RetrofitClient;
+import com.example.linkstation.utilities.CustomDialog;
+import com.example.linkstation.utilities.CustomProgressDialog;
 import com.example.linkstation.utilities.TokenManager;
 
 
@@ -31,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
     private Button btnLogin;
-    private FrameLayout progressOverlay;
 
 
     @Override
@@ -45,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        progressOverlay = findViewById(R.id.progressOverlay);
 
         btnLogin.setOnClickListener(v -> loginUser());
 
@@ -60,15 +60,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
+        CustomProgressDialog progressDialog = new CustomProgressDialog(this);
+        progressDialog.setTitle("Logging in");
+        progressDialog.show();
+
         String username = etUsername.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
-            return;
+            progressDialog.dismiss();
+            CustomDialog dialog = new CustomDialog(this);
+            dialog.setTitle("Error")
+                    .setMessage("Please fill in all fields")
+                    .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                    .setNegativeButton(false, "", null)
+                    .show();
         }
 
-        progressOverlay.setVisibility(View.VISIBLE);
         btnLogin.setEnabled(false);
 
         ApiService apiService = RetrofitClient.getClient(LoginActivity.this).create(ApiService.class);
@@ -82,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     UserModel userModelResponse = response.body();
                     if (userModelResponse != null && userModelResponse.getData() != null) {
+                        progressDialog.dismiss();
                         String accessToken = userModelResponse.getData().getAccessToken();
                         String refreshToken = userModelResponse.getData().getRefreshToken();
                         TokenManager.saveToken(getApplicationContext(), accessToken, refreshToken);
@@ -90,20 +99,40 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        progressOverlay.setVisibility(View.GONE);
+                        progressDialog.dismiss();
                         findViewById(R.id.btnLogin).setEnabled(true);
-                        Toast.makeText(LoginActivity.this, "Login failed:"+ response.message(), Toast.LENGTH_SHORT).show();
+                        CustomDialog dialog = new CustomDialog(LoginActivity.this);
+                        dialog.setTitle("Error")
+                                .setMessage("Login Failed")
+                                .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                                .setNegativeButton(false, "", null)
+                                .show();
                     }
 
                 } else {
-                    progressOverlay.setVisibility(View.GONE);
+                    progressDialog.dismiss();
                     findViewById(R.id.btnLogin).setEnabled(true);
                     if (response.code() == 401) {
-                        Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        CustomDialog dialog = new CustomDialog(LoginActivity.this);
+                        dialog.setTitle("Error")
+                                .setMessage("Invalid Credentials")
+                                .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                                .setNegativeButton(false, "", null)
+                                .show();
                     } else if (response.code() == 402) {
-                        Toast.makeText(LoginActivity.this, "User does not Exist", Toast.LENGTH_SHORT).show();
+                        CustomDialog dialog = new CustomDialog(LoginActivity.this);
+                        dialog.setTitle("Error")
+                                .setMessage("User not found")
+                                .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                                .setNegativeButton(false, "", null)
+                                .show();
                     } else if (response.code()==404) {
-                        Toast.makeText(LoginActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                        CustomDialog dialog = new CustomDialog(LoginActivity.this);
+                        dialog.setTitle("Error")
+                                .setMessage("User not found")
+                                .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                                .setNegativeButton(false, "", null)
+                                .show();
                     }
                 }
 
@@ -111,9 +140,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
-                progressOverlay.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 findViewById(R.id.btnLogin).setEnabled(true);
-                Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                CustomDialog dialog = new CustomDialog(LoginActivity.this);
+                dialog.setTitle("Error")
+                        .setMessage("Login Failed")
+                        .setPositiveButton(true, "Ok", v -> dialog.dismiss())
+                        .setNegativeButton(false, "", null)
+                        .show();
             }
 
         });

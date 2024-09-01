@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.CreateStationActivity">
+
+
+    <!-- TOP BAR -->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
+        style="@style/topBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back"
+            app:backgroundTint="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/space_grotesk_bold"
+            android:text="Station Details"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--MAIN SECTION-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#cbfda9"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/stationTitleSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stationspage_white_section"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <!--            STATION PICTURE AND TITLES-->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/stationTitleDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="15dp">
+
+
+                    <!--                    STATION PHOTO-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_images_border"
+                        android:clipToOutline="true"
+                        android:layout_gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/stationImage"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round_images_border"
+                            android:scaleType="centerCrop"/>
+
+                    </LinearLayout>
+
+
+                    <!--                    STATION NAME AND TITLE-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/stationTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/space_grotesk_bold"
+                                android:text="@string/station_title"
+                                android:textColor="#000"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/stationUrl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/space_grotesk"
+                                android:text="@string/station_url"
+                                android:textColor="#95000000"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+
+                        <!--                        STATION DATE AND PRIVACY-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Day TextView -->
+                            <TextView
+                                android:id="@+id/tvDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3"
+                                android:fontFamily="@font/space_grotesk_medium"
+                                android:textSize="10sp"
+                                android:textColor="#99000000" />
+
+                            <!-- Month TextView -->
+                            <TextView
+                                android:id="@+id/tvMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Jun"
+                                android:fontFamily="@font/space_grotesk_medium"
+                                android:textSize="10sp"
+                                android:textColor="#99000000"
+                                android:layout_marginStart="4dp" />
+
+                            <!-- Year TextView -->
+                            <TextView
+                                android:id="@+id/tvYear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2024"
+                                android:fontFamily="@font/space_grotesk_medium"
+                                android:textSize="10sp"
+                                android:textColor="#99000000"
+                                android:layout_marginStart="4dp" />
+
+                            <!-- Dot (•) -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="•"
+                                android:fontFamily="@font/space_grotesk_medium"
+                                android:textSize="10sp"
+                                android:textColor="#99000000"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Status TextView -->
+                            <TextView
+                                android:id="@+id/statusTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Public"
+                                android:fontFamily="@font/space_grotesk_medium"
+                                android:textSize="10sp"
+                                android:textColor="#99000000" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!--                CONTROL BUTTONS-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="3"
+                    app:layout_constraintTop_toBottomOf="@+id/stationTitleDetails">
+
+                    <!--          EDIT STATION BUTTON-->
+
+                    <ImageView
+                        android:id="@+id/btnEditStation"
+                        android:background="@drawable/tab_graysection"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:padding="7dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/edit_icon" />
+
+                    <!--            SHARE STATION BUTTON-->
+
+                    <ImageView
+                        android:id="@+id/btnShareStation"
+                        android:background="@drawable/tab_graysection"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:padding="7dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/shares_logo" />
+
+                    <!--            OPEN STATION WEBSITE BUTTON-->
+
+                    <ImageView
+                        android:id="@+id/btnStationWebsite"
+                        android:background="@drawable/tab_graysection"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:padding="7dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/www_icon" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        STATION PERFORMANCE-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stationspage_white_section"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stationTitleSection">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/stationPerformance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical">
+
+                    <!-- Station Performance -->
+                    <TextView
+                        android:id="@+id/titleStationPerformance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Station Performance"
+                        android:fontFamily="@font/space_grotesk_bold"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <!-- All Time -->
+                    <TextView
+                        android:id="@+id/subtitleAllTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="All Time"
+                        android:fontFamily="@font/space_grotesk_medium"
+                        android:textSize="12sp"
+                        android:textColor="#999999"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+
+                <!-- Ranking by Views Section -->
+
+                <LinearLayout
+                    android:id="@+id/rankingByViews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/stationPerformance">
+
+
+                    <!-- Label: Ranking by Views -->
+                    <TextView
+                        android:id="@+id/rankingByViewsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ranking by Views"
+                        android:fontFamily="@font/space_grotesk_medium"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+
+
+                    <!--                GAP-->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+
+                    <!-- Value: 1 of 3 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rankingValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:fontFamily="@font/space_grotesk_medium"
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/rankingValueOf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" of "
+                            android:fontFamily="@font/space_grotesk_medium"
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/rankingValueTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:fontFamily="@font/space_grotesk_medium"
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!-- Views Section -->
+
+                <LinearLayout
+                    android:id="@+id/viewsSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/rankingByViews">
+
+
+                    <!-- Label: Views -->
+                    <TextView
+                        android:id="@+id/viewsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Views"
+                        android:fontFamily="@font/space_grotesk_medium"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+
+
+                    <!--                GAP-->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <!-- Value: 1.2 M -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/viewsValue1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.2"
+                            android:fontFamily="@font/space_grotesk_medium"
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/viewsValueM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" M"
+                            android:fontFamily="@font/space_grotesk_medium"
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--VIEWS ANALYTICS-->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    app:layout_constraintTop_toBottomOf="@id/viewsSection"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,10 +4,13 @@ import com.example.linkstation.model.ChangePasswordRequest;
 import com.example.linkstation.model.CreateStationRequest;
 import com.example.linkstation.model.LoginRequest;
 import com.example.linkstation.model.RefreshTokenRequest;
+import com.example.linkstation.model.RegisterOTPRequest;
 import com.example.linkstation.model.RegisterRequest;
 import com.example.linkstation.model.StationModel;
+import com.example.linkstation.model.StationViewsModel;
 import com.example.linkstation.model.UpdateUserDetailsRequest;
 import com.example.linkstation.model.UserModel;
+import com.example.linkstation.model.ViewsModel;
 
 import java.io.File;
 import java.util.List;
@@ -26,6 +29,10 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
+
+    @POST("/api/v1/users/register-otp")
+    Call<ResponseBody> registerOtp(@Body RegisterOTPRequest registerOTPRequest);
+
     @POST("/api/v1/users/login")
     Call<UserModel> loginUser(@Body LoginRequest loginRequest);
 
@@ -82,6 +89,12 @@ public interface ApiService {
 
     @GET("/api/v1/station/popular")
     Call<StationModel> getMostViewedStations(@Header("Authorization") String token, @Query("page") int page, @Query("size") int size);
+
+    @GET("/api/v1/station/total-views")
+    Call<ViewsModel> getTotalViews(@Header("Authorization") String token, @Query("days") int days);
+
+    @GET("/api/v1/station/my-popular")
+    Call<StationViewsModel> getMyMostViewedStations(@Header("Authorization") String token);
 
 
 
